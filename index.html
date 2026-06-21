@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pari's Cafe & Kitchen | Luxury In Every Sip</title>
+    <!-- Google Fonts for Ultra-Luxury Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- DESIGN SYSTEM & VARIABLES --- */
+        :root {
+            --bg-beige-dark: #12100E; /* Deep rich dark background for elite contrast */
+            --bg-beige-light: #F9F6F0; /* Soft luxury silk beige */
+            --gold-primary: #D4AF37; /* Metallic Royal Gold */
+            --gold-gradient: linear-gradient(135deg, #B38728 0%, #FBF5B7 25%, #DAA520 50%, #FBF5B7 75%, #AA771C 100%);
+            --gold-shiny: linear-gradient(90deg, #CE9E37, #FFF2B2, #CE9E37);
+            --text-dark: #1C1A17;
+            --text-light: #EAE5D9;
+            --font-display: 'Cinzel', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* --- RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-beige-dark);
+            color: var(--text-light);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- LUXURY SCROLLBAR --- */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #12100E;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold-gradient);
+            border-radius: 4px;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+
+        .gold-text {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 5%;
+            background: rgba(18, 16, 14, 0.95);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        /* --- BRAND LOGO CONTAINER --- */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 60px; /* Perfectly scaled premium desktop logo height */
+            width: auto;
+            object-fit: contain;
+            transition: var(--transition-smooth);
+        }
+
+        .logo-container:hover .logo-img {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold-gradient);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            background: radial-gradient(circle, rgba(40,34,25,1) 0%, rgba(12,10,14,1) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat;
+            opacity: 0.15;
+            mix-blend-mode: overlay;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            animation: fadeInDown 1.5s ease;
+        }
+
+        .hero p {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            color: var(--bg-beige-light);
+            opacity: 0.9;
+        }
+
+        /* --- PREMIUM BUTTONS --- */
+        .btn-gold {
+            background: var(--gold-gradient);
+            color: var(--text-dark) !important;
+            padding: 16px 40px;
+            border: none;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            border-radius: 0px;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+            filter: brightness(1.1);
+        }
+
+        /* --- SECTION WRAPPERS --- */
+        section {
+            padding: 120px 10%;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 2px;
+            background: var(--gold-gradient);
+            margin: 15px auto 0;
+        }
+
+        /* --- PARI'S STORY SECTION --- */
+        .story-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .story-text {
+            flex: 1;
+        }
+
+        .story-text p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: #C4BEB3;
+            font-weight: 300;
+            text-align: justify;
+        }
+
+        .story-img {
+            flex: 1;
+            position: relative;
+        }
+
+        .story-img img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border: 1px solid var(--gold-primary);
+            padding: 12px;
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        /* --- ABOUT US (THE EXPERIENCE) --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .about-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition-smooth);
+        }
+
+        .about-card:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-5px);
+            background: rgba(212, 175, 55, 0.03);
+        }
+
+        .about-card i {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .about-card p {
+            font-size: 0.95rem;
+            color: #A6A095;
+            font-weight: 300;
+        }
+
+        /* --- FOUNDER SECTION --- */
+        .founder {
+            background: #181512;
+        }
+
+        .founder-container {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .founder-img {
+            flex: 1;
+            text-align: center;
+        }
+
+        .founder-img img {
+            width: 350px;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border: 1px solid var(--gold-primary);
+        }
+
+        .founder-text {
+            flex: 1;
+        }
+
+        .founder-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .founder-title {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .founder-text p {
+            font-size: 1.05rem;
+            color: #C4BEB3;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .info-item i {
+            font-size: 1.5rem;
+            color: var(--gold-primary);
+            width: 30px;
+        }
+
+        .info-item p {
+            font-size: 1rem;
+            color: #C4BEB3;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-form input, .contact-form textarea {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 15px;
+            color: var(--text-light);
+            font-family: var(--font-sans);
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: var(--gold-primary);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        /* --- REDIRECT/ZOMATO BANNER --- */
+        .order-banner {
+            background: radial-gradient(circle, #221B10 0%, #12100E 100%);
+            text-align: center;
+            padding: 80px 20px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .order-banner h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .order-banner p {
+            font-size: 1.1rem;
+            margin-bottom: 35px;
+            color: #C4BEB3;
+            letter-spacing: 1px;
+        }
+
+        .zomato-btn {
+            background: #E23744; /* Authentic Zomato Red */
+            color: white;
+            padding: 16px 45px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 15px rgba(226, 55, 68, 0.3);
+        }
+
+        .zomato-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(226, 55, 68, 0.5);
+            filter: brightness(1.1);
+        }
+
+        /* --- FLOATING ACTIONS & ICONS --- */
+        .floating-socials {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 9999;
+        }
+
+        .float-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white !important;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: var(--transition-smooth);
+        }
+
+        .float-btn:hover {
+            transform: scale(1.1) translateY(-5px);
+        }
+
+        .float-btn.instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        .float-btn.whatsapp {
+            background: #25D366;
+        }
+
+        .float-btn.maps {
+            background: #4285F4;
+        }
+
+        /* App Store Playstore Badges */
+        .apps-container {
+            margin-top: 25px;
+            display: flex;
+            gap: 15px;
+            justify-content: flex-start;
+        }
+
+        .app-icon {
+            font-size: 1.8rem;
+            color: var(--gold-primary);
+            transition: var(--transition-smooth);
+            text-decoration: none;
+        }
+        
+        .app-icon:hover {
+            color: var(--text-light);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #0B0908;
+            padding: 40px 5%;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #666;
+            border-top: 1px solid #1C1A17;
+            letter-spacing: 1px;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 968px) {
+            .story-container, .founder-container, .contact-container {
+                flex-direction: column;
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .nav-links {
+                display: none; /* Simple fallback for mobile brevity */
+            }
+            .logo-img {
+                height: 45px; /* Scaled down slightly for mobile convenience */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- --- NAVIGATION --- -->
+    <nav>
+        <!-- IMAGE-BASED LOGO WRAPPER -->
+        <!-- NOTE: Replace 'logo.png' with the actual filename or remote URL of your logo asset -->
+        <a href="#" class="logo-container">
+            <img src="logo.png" alt="Pari's Cafe Logo" class="logo-img">
+        </a>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#story">Our Story</a></li>
+            <li><a href="#about">The Experience</a></li>
+            <li><a href="#founder">The Founder</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#order" class="btn-gold" style="padding: 10px 20px; font-size: 0.75rem;">Order Now</a>
+    </nav>
+
+    <!-- --- HERO SECTION --- -->
+    <section class="hero">
+        <h1 class="gold-text">Pari's Cafe & Kitchen</h1>
+        <p>Luxury In Every Sip</p>
+        <a href="#order" class="btn-gold">Experience Elegance</a>
+    </section>
+
+    <!-- --- PARI'S STORY SECTION --- -->
+    <section id="story">
+        <h2 class="section-title">Pari's Story</h2>
+        <div class="story-container">
+            <div class="story-text">
+                <p>Born from a vision of absolute perfection, Pari's Cafe & Kitchen isn't merely a dining venue; it is a sanctuary for the epicurean elite. We believe that culinary execution is high art, and every creation emerging from our kitchen represents a masterpiece of flavor, balance, and aesthetic brilliance.</p>
+                <p>Our journey began with a definitive mandate: to dismantle ordinary dining standards and reconstruct them with unprecedented refinement. From sourcing ultra-rare single-estate coffee beans to curated premium ingredients, we compromise on nothing to orchestrate an experience reserved for those who demand the finest.</p>
+            </div>
+            <div class="story-img">
+                <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&q=80&w=800" alt="Luxury Dining">
+            </div>
+        </div>
+    </section>
+
+    <!-- --- ABOUT US SECTION (THE EXPERIENCE) --- -->
+    <section id="about">
+        <h2 class="section-title">About Our Pillars</h2>
+        <div class="about-grid">
+            <div class="about-card">
+                <i class="fa-solid fa-crown"></i>
+                <h3>Royal Ambiance</h3>
+                <p>An exquisite landscape constructed with bespoke textures, brushed gold architecture, and sophisticated curation designed for exclusive comfort.</p>
+            </div>
+            <div class="about-card">
+                <i class="fa-solid fa-gem"></i>
+                <h3>Elite Gastronomy</h3>
+                <p>Every beverage and culinary offering is precision-engineered by master culinary craftsmen using rare, globally-sourced ingredients.</p>
+            </div>
+            <div class="about-card">
+                <i class="fa-solid fa-star"></i>
+                <h3>Unmatched Distinction</h3>
+                <p>Catering explicitly to high-profile connoisseurs who view exceptional standards not as a feature, but as a mandatory lifestyle asset.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- FOUNDER SECTION --- -->
+    <section id="founder" class="founder">
+        <h2 class="section-title">The Mastermind</h2>
+        <div class="founder-container">
+            <div class="founder-img">
+                <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=800" alt="Founder of Pari's Cafe">
+            </div>
+            <div class="founder-text">
+                <h3>The Visionary Architect</h3>
+                <p class="founder-title gold-text">Founder & CEO</p>
+                <p>Driven by an unrelenting obsession for world-class hospitality, our founder established Pari’s Cafe & Kitchen to bridge the gap between casual culinary indulgence and elite haute living.</p>
+                <p>"We do not merely process reservations or serve beverages. We craft sensory prestige. Pari's is designed strictly to offer an uncompromising sanctuary where brilliance meets your palate."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- ORDER ON ZOMATO BANNER --- -->
+    <section id="order" class="order-banner">
+        <h2>Order On Zomato</h2>
+        <p>Bring the signature multi-trillionaire dining asset directly to your private estate or corporate suite.</p>
+        <a href="#" target="_blank" class="zomato-btn">
+            <i class="fa-solid fa-utensils"></i> Order On Zomato
+        </a>
+    </section>
+
+    <!-- --- CONTACT SECTION --- -->
+    <section id="contact">
+        <h2 class="section-title">Secure Your Experience</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Private Concierge</h3>
+                <div class="info-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p>Exclusive Premium Hub, Jubilee Hills / Madhapur, Hyderabad, India</p>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <p>+91 99999 99999</p>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <p>concierge@pariskafe.com</p>
+                </div>
+                
+                <!-- Playstore & Appstore Iconic Links -->
+                <div style="margin-top: 40px;">
+                    <h4 style="font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">Download Our Digital Ecosystem</h4>
+                    <div class="apps-container">
+                        <a href="#" class="app-icon" title="Download on Apple App Store"><i class="fa-brands fa-app-store-ios"></i></a>
+                        <a href="#" class="app-icon" title="Download on Google Play Store"><i class="fa-brands fa-google-play"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <input type="text" placeholder="YOUR NAME" required>
+                <input type="email" placeholder="YOUR ELITE EMAIL" required>
+                <textarea rows="5" placeholder="VIP REQUEST OR RESERVATION DETAILS" required></textarea>
+                <button class="btn-gold">Submit To Concierge</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- FLOATING SOCIAL BUTTONS --- -->
+    <div class="floating-socials">
+        <a href="#" target="_blank" class="float-btn instagram" title="Follow our Grandeur on Instagram">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="#" target="_blank" class="float-btn whatsapp" title="Chat with Concierge">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="#" target="_blank" class="float-btn maps" title="Locate the Luxury">
+            <i class="fa-solid fa-location-arrow"></i>
+        </a>
+    </div>
+
+    <!-- --- FOOTER --- -->
+    <footer>
+        <p>&copy; 2026 Pari's Cafe & Kitchen. All Rights Reserved. Designed for Supreme Luxury.</p>
+    </footer>
+
+</body>
+</html>
