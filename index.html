@@ -23,7 +23,8 @@
             --text-light: #EAE5D9;
             --font-display: 'Cinzel', serif;
             --font-sans: 'Montserrat', sans-serif;
-            --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            --transition-smooth: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            --transition-slow: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         /* --- RESET & BASE STYLES --- */
@@ -68,12 +69,42 @@
             display: inline-block;
         }
 
+        /* --- SCROLL ANIMATION BASE CLASSES --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: var(--transition-slow);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: var(--transition-slow);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: var(--transition-slow);
+        }
+
+        /* Triggered via JS when scrolled into view */
+        .active {
+            opacity: 1 !important;
+            transform: translate(0) !important;
+        }
+
+        /* Staggered delays for child cards */
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+        .delay-3 { transition-delay: 0.6s; }
+
         /* --- NAVIGATION --- */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 10px 5%;
+            padding: 20px 5%;
             background: rgba(18, 16, 14, 0.95);
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
             display: flex;
@@ -81,25 +112,23 @@
             align-items: center;
             z-index: 1000;
             backdrop-filter: blur(10px);
+            animation: fadeInNav 1s ease-out;
         }
 
-        /* --- BRAND LOGO CONTAINER --- */
-        .logo-container {
-            display: flex;
-            align-items: center;
+        /* TEXT LOGO STYLING */
+        .text-logo {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
             text-decoration: none;
-        }
-
-        .logo-img {
-            height: 75px; /* Enhanced size for crisp detailing of your gold vector logo */
-            width: auto;
-            object-fit: contain;
             transition: var(--transition-smooth);
         }
 
-        .logo-container:hover .logo-img {
-            transform: scale(1.05);
-            filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.5));
+        .text-logo:hover {
+            transform: scale(1.03);
+            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
         }
 
         .nav-links {
@@ -150,23 +179,25 @@
             padding: 0 20px;
             position: relative;
             background: radial-gradient(circle, rgba(40,34,25,1) 0%, rgba(12,10,14,1) 100%);
+            overflow: hidden;
         }
 
         .hero::before {
             content: '';
             position: absolute;
             inset: 0;
-            /* CHANGE 'hero_bg.jpeg' to your local hero background image file name if preferred */
             background: url('hero_bg.jpeg') center/cover no-repeat;
             opacity: 0.15;
             mix-blend-mode: overlay;
+            animation: ultraSlowZoom 25s infinite alternate;
         }
 
         .hero h1 {
             font-size: 4.5rem;
             margin-bottom: 10px;
             text-transform: uppercase;
-            animation: fadeInDown 1.5s ease;
+            opacity: 0;
+            animation: fadeInUpControlled 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.3s;
         }
 
         .hero p {
@@ -176,7 +207,13 @@
             text-transform: uppercase;
             margin-bottom: 40px;
             color: var(--bg-beige-light);
-            opacity: 0.9;
+            opacity: 0;
+            animation: fadeInUpControlled 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.6s;
+        }
+
+        .hero .btn-gold {
+            opacity: 0;
+            animation: fadeInUpControlled 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.9s;
         }
 
         /* --- PREMIUM BUTTONS --- */
@@ -198,8 +235,8 @@
         }
 
         .btn-gold:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.5);
             filter: brightness(1.1);
         }
 
@@ -219,21 +256,30 @@
         .section-title::after {
             content: '';
             display: block;
-            width: 80px;
+            width: 0;
             height: 2px;
             background: var(--gold-gradient);
             margin: 15px auto 0;
+            transition: width 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
+        }
+
+        /* When parent section becomes active, draw underline */
+        section.active .section-title::after {
+            width: 80px;
         }
 
         /* --- PARI'S STORY SECTION --- */
         .story-container {
             display: flex;
-            align-items: center;
+            align-items: stretch;
             gap: 60px;
         }
 
         .story-text {
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .story-text p {
@@ -244,18 +290,30 @@
             text-align: justify;
         }
 
+        .story-text p:last-child {
+            margin-bottom: 0;
+        }
+
         .story-img {
             flex: 1;
-            position: relative;
+            display: flex;
+            overflow: hidden;
         }
 
         .story-img img {
             width: 100%;
-            height: 450px;
+            height: 100%;
             object-fit: cover;
             border: 1px solid var(--gold-primary);
             padding: 12px;
             background: rgba(212, 175, 55, 0.05);
+            transition: var(--transition-slow);
+        }
+
+        /* Elegant layout scale effect on frame hover */
+        .story-img:hover img {
+            transform: scale(1.04);
+            border-color: #FFF2B2;
         }
 
         /* --- ABOUT US (THE EXPERIENCE) --- */
@@ -275,8 +333,9 @@
 
         .about-card:hover {
             border-color: var(--gold-primary);
-            transform: translateY(-5px);
-            background: rgba(212, 175, 55, 0.03);
+            transform: translateY(-8px);
+            background: rgba(212, 175, 55, 0.04);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.08);
         }
 
         .about-card i {
@@ -285,6 +344,11 @@
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            transition: transform 0.6s ease;
+        }
+
+        .about-card:hover i {
+            transform: rotateY(360deg);
         }
 
         .about-card h3 {
@@ -307,26 +371,39 @@
         .founder-container {
             display: flex;
             flex-direction: row-reverse;
-            align-items: center;
+            align-items: stretch;
             gap: 60px;
         }
 
         .founder-img {
             flex: 1;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
         }
 
         .founder-img img {
-            width: 350px;
-            height: 450px;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
             object-fit: cover;
-            border-radius: 0;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             border: 1px solid var(--gold-primary);
+            padding: 12px;
+            background: rgba(212, 175, 55, 0.05);
+            transition: var(--transition-slow);
+        }
+
+        .founder-img:hover img {
+            transform: scale(1.03);
+            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.15);
         }
 
         .founder-text {
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .founder-text h3 {
@@ -347,6 +424,10 @@
             color: #C4BEB3;
             font-weight: 300;
             margin-bottom: 20px;
+        }
+        
+        .founder-text p:last-child {
+            margin-bottom: 0;
         }
 
         /* --- CONTACT SECTION --- */
@@ -398,6 +479,7 @@
         .contact-form input:focus, .contact-form textarea:focus {
             border-color: var(--gold-primary);
             background: rgba(255, 255, 255, 0.06);
+            transform: translateX(4px);
         }
 
         /* --- REDIRECT/ZOMATO BANNER --- */
@@ -438,8 +520,8 @@
         }
 
         .zomato-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(226, 55, 68, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(226, 55, 68, 0.5);
             filter: brightness(1.1);
         }
 
@@ -501,6 +583,7 @@
         
         .app-icon:hover {
             color: var(--text-light);
+            transform: translateY(-3px);
         }
 
         /* --- FOOTER --- */
@@ -514,24 +597,30 @@
             letter-spacing: 1px;
         }
 
-        /* --- ANIMATIONS --- */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* --- BASE NATIVE ANIMATIONS --- */
+        @keyframes fadeInNav {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUpControlled {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes ultraSlowZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.12); }
         }
 
         /* --- RESPONSIVE DESIGN --- */
         @media (max-width: 968px) {
             .story-container, .founder-container, .contact-container {
-                flex-direction: column;
-                grid-template-columns: 1fr;
+                flex-direction: column !important;
                 gap: 40px;
+            }
+            .story-img img, .founder-img img {
+                height: 350px;
             }
             .about-grid {
                 grid-template-columns: 1fr;
@@ -539,11 +628,17 @@
             .hero h1 {
                 font-size: 2.8rem;
             }
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 5%;
+            }
             .nav-links {
                 display: none;
             }
-            .logo-img {
-                height: 55px;
+            /* Strip directional translations on mobile for cleaner layout initialization */
+            .reveal-left, .reveal-right {
+                transform: translateY(30px);
             }
         }
     </style>
@@ -552,11 +647,7 @@
 
     <!-- --- NAVIGATION --- -->
     <nav>
-        <!-- LOCAL TRANSPARENT PNG LOGO LINK -->
-        <!-- CHANGE 'watermarked_img_14003361650082533025.png' to your exact transparent logo filename if renamed -->
-        <a href="#" class="logo-container">
-            <img src="parilogo.jpeg">
-        </a>
+        <a href="#" class="text-logo gold-text">pari’s</a>
         <ul class="nav-links">
             <li><a href="#">Home</a></li>
             <li><a href="#story">Our Story</a></li>
@@ -576,14 +667,13 @@
 
     <!-- --- PARI'S STORY SECTION --- -->
     <section id="story">
-        <h2 class="section-title">Pari's Story</h2>
+        <h2 class="section-title reveal">Pari's Story</h2>
         <div class="story-container">
-            <div class="story-text">
-                <p>Born from a vision of absolute perfection, Pari's Cafe isn't merely a dining venue; it is a sanctuary for the epicurean elite. We believe that culinary execution is high art, and every creation emerging from our kitchen represents a masterpiece of flavor, balance, and aesthetic brilliance.</p>
+            <div class="story-text reveal-left">
+                <p>Born from a vision of absolute perfection, Pari's Cafe isn't merely a dining venue; it is a sanctuary for the elite epicurean landscape. We believe that culinary execution is high art, and every creation emerging from our kitchen represents a masterpiece of flavor, balance, and aesthetic brilliance.</p>
                 <p>Our journey began with a definitive mandate: to dismantle ordinary dining standards and reconstruct them with unprecedented refinement. From sourcing ultra-rare single-estate coffee beans to curated premium ingredients, we compromise on nothing to orchestrate an experience reserved for those who demand the finest.</p>
             </div>
-            <div class="story-img">
-                <!-- CHANGE 'story_display.jpeg' to your local image filename if desired -->
+            <div class="story-img reveal-right">
                 <img src="story_display.jpeg" alt="Luxury Dining">
             </div>
         </div>
@@ -591,19 +681,19 @@
 
     <!-- --- ABOUT US SECTION (THE EXPERIENCE) --- -->
     <section id="about">
-        <h2 class="section-title">About Our Pillars</h2>
+        <h2 class="section-title reveal">About Our Pillars</h2>
         <div class="about-grid">
-            <div class="about-card">
+            <div class="about-card reveal delay-1">
                 <i class="fa-solid fa-crown"></i>
                 <h3>Royal Ambiance</h3>
                 <p>An exquisite landscape constructed with bespoke textures, brushed gold architecture, and sophisticated curation designed for exclusive comfort.</p>
             </div>
-            <div class="about-card">
+            <div class="about-card reveal delay-2">
                 <i class="fa-solid fa-gem"></i>
                 <h3>Elite Gastronomy</h3>
                 <p>Every beverage and culinary offering is precision-engineered by master culinary craftsmen using rare, globally-sourced ingredients.</p>
             </div>
-            <div class="about-card">
+            <div class="about-card reveal delay-3">
                 <i class="fa-solid fa-star"></i>
                 <h3>Unmatched Distinction</h3>
                 <p>Catering explicitly to high-profile connoisseurs who view exceptional standards not as a feature, but as a mandatory lifestyle asset.</p>
@@ -613,14 +703,12 @@
 
     <!-- --- FOUNDER SECTION --- -->
     <section id="founder" class="founder">
-        <h2 class="section-title">The Mastermind</h2>
+        <h2 class="section-title reveal">The Mastermind</h2>
         <div class="founder-container">
-            <div class="founder-img">
-                <!-- LOCAL FOUNDER PICTURE -->
-                <!-- CHANGE 'IMG_0923.jpeg' to your local filename if you rename it -->
+            <div class="founder-img reveal-left">
                 <img src="IMG_0923.jpeg" alt="Founder of Pari's Cafe">
             </div>
-            <div class="founder-text">
+            <div class="founder-text reveal-right">
                 <h3>The Visionary Architect</h3>
                 <p class="founder-title gold-text">Founder & CEO</p>
                 <p>Driven by an unrelenting obsession for world-class hospitality, our founder established Pari’s Cafe to bridge the gap between casual culinary indulgence and elite haute living.</p>
@@ -630,7 +718,7 @@
     </section>
 
     <!-- --- ORDER ON ZOMATO BANNER --- -->
-    <section id="order" class="order-banner">
+    <section id="order" class="order-banner reveal">
         <h2>Order On Zomato</h2>
         <p>Bring the signature multi-trillionaire dining asset directly to your private estate or corporate suite.</p>
         <a href="#" target="_blank" class="zomato-btn">
@@ -640,9 +728,9 @@
 
     <!-- --- CONTACT SECTION --- -->
     <section id="contact">
-        <h2 class="section-title">Secure Your Experience</h2>
+        <h2 class="section-title reveal">Secure Your Experience</h2>
         <div class="contact-container">
-            <div class="contact-info">
+            <div class="contact-info reveal-left">
                 <h3>Private Concierge</h3>
                 <div class="info-item">
                     <i class="fa-solid fa-location-dot"></i>
@@ -667,7 +755,7 @@
                 </div>
             </div>
             
-            <div class="contact-form">
+            <div class="contact-form reveal-right">
                 <input type="text" placeholder="YOUR NAME" required>
                 <input type="email" placeholder="YOUR ELITE EMAIL" required>
                 <textarea rows="5" placeholder="VIP REQUEST OR RESERVATION DETAILS" required></textarea>
@@ -694,5 +782,25 @@
         <p>&copy; 2026 Pari's Cafe. All Rights Reserved. Designed for Supreme Luxury.</p>
     </footer>
 
+    <!-- --- SCROLL ANIMATION JAVASCRIPT --- -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Target all custom reveal selectors
+            const targetElements = document.querySelectorAll(".reveal, .reveal-left, .reveal-right, section");
+
+            const scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                    }
+                });
+            }, {
+                threshold: 0.15, // Triggers when 15% of the section is visible
+                rootMargin: "0px 0px -50px 0px" // Slight bottom offset for better visual entrance timing
+            });
+
+            targetElements.forEach(el => scrollObserver.observe(el));
+        });
+    </script>
 </body>
 </html>
