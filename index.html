@@ -73,7 +73,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 15px 5%;
+            padding: 10px 5%;
             background: rgba(18, 16, 14, 0.95);
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
             display: flex;
@@ -91,7 +91,7 @@
         }
 
         .logo-img {
-            height: 60px; /* Perfectly scaled premium desktop logo height */
+            height: 75px; /* Enhanced size for crisp detailing of your gold vector logo */
             width: auto;
             object-fit: contain;
             transition: var(--transition-smooth);
@@ -99,7 +99,7 @@
 
         .logo-container:hover .logo-img {
             transform: scale(1.05);
-            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+            filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.5));
         }
 
         .nav-links {
@@ -156,7 +156,8 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat;
+            /* CHANGE 'hero_bg.jpeg' to your local hero background image file name if preferred */
+            background: url('hero_bg.jpeg') center/cover no-repeat;
             opacity: 0.15;
             mix-blend-mode: overlay;
         }
@@ -539,10 +540,10 @@
                 font-size: 2.8rem;
             }
             .nav-links {
-                display: none; /* Simple fallback for mobile brevity */
+                display: none;
             }
             .logo-img {
-                height: 45px; /* Scaled down slightly for mobile convenience */
+                height: 55px;
             }
         }
     </style>
@@ -551,10 +552,10 @@
 
     <!-- --- NAVIGATION --- -->
     <nav>
-        <!-- IMAGE-BASED LOGO WRAPPER -->
-        <!-- NOTE: Replace 'logo.png' with the actual filename or remote URL of your logo asset -->
+        <!-- LOCAL TRANSPARENT PNG LOGO LINK -->
+        <!-- CHANGE 'watermarked_img_14003361650082533025.png' to your exact transparent logo filename if renamed -->
         <a href="#" class="logo-container">
-            <img src="logo.png" alt="Pari's Cafe Logo" class="logo-img">
+            <img src="watermarked_img_14003361650082533025.png" alt="Pari's Logo" class="logo-img">
         </a>
         <ul class="nav-links">
             <li><a href="#">Home</a></li>
@@ -568,7 +569,7 @@
 
     <!-- --- HERO SECTION --- -->
     <section class="hero">
-        <h1 class="gold-text">Pari's Cafe & Kitchen</h1>
+        <h1 class="gold-text">Pari's Cafe</h1>
         <p>Luxury In Every Sip</p>
         <a href="#order" class="btn-gold">Experience Elegance</a>
     </section>
@@ -578,11 +579,12 @@
         <h2 class="section-title">Pari's Story</h2>
         <div class="story-container">
             <div class="story-text">
-                <p>Born from a vision of absolute perfection, Pari's Cafe & Kitchen isn't merely a dining venue; it is a sanctuary for the epicurean elite. We believe that culinary execution is high art, and every creation emerging from our kitchen represents a masterpiece of flavor, balance, and aesthetic brilliance.</p>
+                <p>Born from a vision of absolute perfection, Pari's Cafe isn't merely a dining venue; it is a sanctuary for the epicurean elite. We believe that culinary execution is high art, and every creation emerging from our kitchen represents a masterpiece of flavor, balance, and aesthetic brilliance.</p>
                 <p>Our journey began with a definitive mandate: to dismantle ordinary dining standards and reconstruct them with unprecedented refinement. From sourcing ultra-rare single-estate coffee beans to curated premium ingredients, we compromise on nothing to orchestrate an experience reserved for those who demand the finest.</p>
             </div>
             <div class="story-img">
-                <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&q=80&w=800" alt="Luxury Dining">
+                <!-- CHANGE 'story_display.jpeg' to your local image filename if desired -->
+                <img src="story_display.jpeg" alt="Luxury Dining">
             </div>
         </div>
     </section>
@@ -614,12 +616,14 @@
         <h2 class="section-title">The Mastermind</h2>
         <div class="founder-container">
             <div class="founder-img">
-                <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=800" alt="Founder of Pari's Cafe">
+                <!-- LOCAL FOUNDER PICTURE -->
+                <!-- CHANGE 'IMG_0923.jpeg' to your local filename if you rename it -->
+                <img src="IMG_0923.jpeg" alt="Founder of Pari's Cafe">
             </div>
             <div class="founder-text">
                 <h3>The Visionary Architect</h3>
                 <p class="founder-title gold-text">Founder & CEO</p>
-                <p>Driven by an unrelenting obsession for world-class hospitality, our founder established Pari’s Cafe & Kitchen to bridge the gap between casual culinary indulgence and elite haute living.</p>
+                <p>Driven by an unrelenting obsession for world-class hospitality, our founder established Pari’s Cafe to bridge the gap between casual culinary indulgence and elite haute living.</p>
                 <p>"We do not merely process reservations or serve beverages. We craft sensory prestige. Pari's is designed strictly to offer an uncompromising sanctuary where brilliance meets your palate."</p>
             </div>
         </div>
@@ -687,7 +691,7 @@
 
     <!-- --- FOOTER --- -->
     <footer>
-        <p>&copy; 2026 Pari's Cafe & Kitchen. All Rights Reserved. Designed for Supreme Luxury.</p>
+        <p>&copy; 2026 Pari's Cafe. All Rights Reserved. Designed for Supreme Luxury.</p>
     </footer>
 
 </body>
